@@ -3,44 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informasi Wisata: Bukit Widodaren Sendang Ijo</title>
+    <title>Pesona Desa Wisata</title>
     <style>
-        /* Tombol Google Maps */
-        .btn-maps {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #4285F4; /* Warna biru standar Google */
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.05rem;
-            margin-top: 25px;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
-            width: 100%; /* Biar tombolnya full menyesuaikan lebar di HP */
-            max-width: 400px; /* Tapi tetap rapi di layar laptop */
-        }
-
-        .btn-maps:hover {
-            background-color: #3367D6;
-            transform: translateY(-3px);
-        }
-
-        .btn-maps svg {
-            margin-right: 10px;
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
+        /* Pengaturan Dasar & Variabel Warna */
         :root {
-            --primary: #2c3e50; 
-            --secondary: #34495e;
-            --bg-light: #f5f6fa;
-            --text-dark: #2f3542;
-            --accent: #e67e22; /* Warna senja */
+            --primary-color: #2E7D32; /* Hijau Alam */
+            --secondary-color: #F9A825; /* Kuning Senja */
+            --text-dark: #333333;
+            --text-light: #F5F5F5;
         }
 
         * {
@@ -48,336 +18,245 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-light);
+            background-color: #FAFAFA;
             color: var(--text-dark);
-            line-height: 1.6;
         }
 
-        /* Header Specific Tour */
-        .tour-header {
-            /* Background gradien senja */
-            background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(80, 44, 46, 0)), url('bukit-widodadaren.png') center/cover;
-            color: white;
-            padding: 100px 20px;
-            text-align: center;
-        }
-
-        .tour-header h1 {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .tour-header p {
-            font-size: 1.3rem;
-            opacity: 0.95;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Container & Tabs */
-        .container {
-            max-width: 1000px;
-            margin: -50px auto 50px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .tabs {
-            display: flex;
-            background: var(--primary);
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 20px;
-            border: none;
-            background: transparent;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .tab-btn:hover {
-            background: rgba(255,255,255,0.1);
-        }
-
-        .tab-btn.active {
-            background: white;
-            color: var(--primary);
-            border-top: 4px solid var(--accent);
-        }
-
-        /* Content Area */
-        .tab-content {
-            display: none;
-            padding: 40px;
-            animation: fadeIn 0.4s ease-in-out;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .tab-content h2 {
-            color: var(--primary);
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--accent);
-            display: inline-block;
-            padding-bottom: 5px;
-        }
-
-        .tab-content p {
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-
-        /* Interaktif Accordion */
-        .accordion {
-            background-color: #f1f2f6;
-            color: var(--primary);
-            cursor: pointer;
-            padding: 18px;
+        /* Navigasi */
+        nav {
+            position: fixed;
+            top: 0;
             width: 100%;
-            text-align: left;
-            border: none;
-            outline: none;
-            transition: 0.3s;
-            font-weight: bold;
-            font-size: 1.05rem;
-            margin-top: 10px;
-            border-radius: 8px;
+            padding: 20px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .active-acc, .accordion:hover {
-            background-color: #dfe4ea;
-        }
-
-        .accordion::after {
-            content: '\002B'; /* Simbol Plus */
-            font-size: 1.5rem;
-            color: var(--accent);
-        }
-
-        .active-acc::after {
-            content: '\2212'; /* Simbol Minus */
-        }
-
-        .panel {
-            padding: 0 18px;
-            background-color: white;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            border-left: 3px solid var(--accent);
-            margin-bottom: 5px;
-        }
-
-        .panel p {
-            margin: 15px 0;
-        }
-
-        /* Galeri Interaktif */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-
-        .gallery-item {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-
-        /* Lightbox Modal */
-        .modal {
-            display: none;
-            position: fixed;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
             z-index: 1000;
-            padding-top: 60px;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
+            transition: 0.3s ease;
         }
 
-        .modal-content {
-            margin: auto;
-            display: block;
-            max-width: 85%;
-            max-height: 85vh;
-            border-radius: 5px;
-            animation: zoom 0.3s;
+        nav.scrolled {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        @keyframes zoom {
-            from {transform:scale(0)} 
-            to {transform:scale(1)}
+        nav.scrolled .logo, nav.scrolled a {
+            color: var(--primary-color);
         }
 
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            color: #f1f1f1;
-            font-size: 40px;
+        .logo {
+            font-size: 24px;
             font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
+            color: var(--text-light);
+            text-decoration: none;
+            letter-spacing: 2px;
         }
 
-        .close:hover {
-            color: var(--accent);
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            transition: color 0.3s;
         }
 
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('pemndangan-home.png') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-light);
+            padding: 0 20px;
+        }
+
+        #hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: fadeInDown 1s ease;
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .btn-cta {
+            padding: 15px 30px;
+            background-color: var(--secondary-color);
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .btn-cta:hover {
+            background-color: #FBC02D;
+            transform: translateY(-5px);
+        }
+
+        /* Destinasi Section */
+        #destinasi {
+            padding: 80px 50px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            text-align: left;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .card-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        /* Animasi Sederhana */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsif untuk HP */
+        @media (max-width: 768px) {
+            nav { padding: 20px; flex-direction: column; gap: 15px; }
+            .nav-links a { margin: 0 10px; }
+            #hero h1 { font-size: 2.5rem; }
+            #destinasi { padding: 50px 20px; }
+        }
     </style>
 </head>
 <body>
 
-    <header class="tour-header">
-        <h1>Bukit Widodaren</h1>
-        <p>Spot berburu senja terbaik di atas miniatur Ranu Kumbolo (Telaga Claket), Desa Sendang Ijo, Wonogiri.</p>
-    </header>
-
-    <div class="container">
-        <div class="tabs">
-            <button class="tab-btn active" onclick="openTab(event, 'Deskripsi')">Tentang Bukit</button>
-            <button class="tab-btn" onclick="openTab(event, 'Fasilitas')">Panduan & Rute</button>
-            <button class="tab-btn" onclick="openTab(event, 'Galeri')">Visual Lanskap</button>
+    <nav id="navbar">
+        <a href="#" class="logo">Sendangijo</a>
+        <div class="nav-links">
+            <a href="#hero">Beranda</a>
+            <a href="#destinasi">Destinasi</a>
+            <a href="#budaya">Katalog</a>
+            <a href="#kontak">Kontak</a>
         </div>
+    </nav>
 
-        <div id="Deskripsi" class="tab-content active">
-            <h2>Pesona Ketinggian Wonogiri</h2>
-            <p>Bukit Widodaren terletak tepat di sebelah barat <strong>Telaga Claket</strong>, Desa Sendang Ijo, Kecamatan Selogiri, Kabupaten Wonogiri. Bukit dengan ketinggian kurang dari 200 mdpl ini menjadi magnet bagi para pemburu senja (*sunset hunters*).</p>
-            <p>Dari puncaknya, pengunjung akan disuguhkan pemandangan Telaga Claket di bawahnya yang menyerupai Ranu Kumbolo. Jika cuaca sedang cerah, deretan Gunung Lawu di sisi timur, serta Gunung Merapi dan Merbabu di sisi barat akan terlihat memanjakan mata.</p>
-        </div>
+    <section id="hero">
+        <h1>Temukan Kedamaian Alami</h1>
+        <p>Tinggalkan hiruk pikuk kota. Jelajahi keindahan alam, kearifan lokal, dan kuliner otentik di desa kami yang asri.</p>
+        <a href="#destinasi" class="btn-cta">Jelajahi Sekarang</a>
+    </section>
 
-        <div id="Fasilitas" class="tab-content">
-            <h2>Informasi Penting Sebelum Naik</h2>
-            <p>Pahami detail rute dan persiapan berikut agar pendakian singkat lu aman dan nyaman:</p>
-            
-            <button class="accordion">Akses, Parkir & Tiket</button>
-            <div class="panel">
-                <p>Kendaraan pengunjung tidak bisa naik ke bukit, melainkan harus diparkir di area <strong>Telaga Claket</strong>. Harga tiket masuk kawasan sekitar Rp 10.000/orang, dengan tarif parkir motor Rp 2.000 dan mobil Rp 5.000.</p>
+    <section id="destinasi">
+        <h2 class="section-title">Spot Unggulan Kami</h2>
+        <div class="grid-container">
+            <div class="card">
+                <img src="bukit-widodadaren.png" alt="Bukit Widodaren">
+                <div class="card-content">
+                    <h3>Bukit widodaren</h3>
+                    <p>Nikmati keindahan perbukitan yang asri dengan jalur treking yang bisa dijalani oleh keluarga anda.</p>
+                </div>
             </div>
-
-            <button class="accordion">Trek Pendakian & Waktu Tempuh</button>
-            <div class="panel">
-                <p>Dari lokasi parkir, lu harus berjalan kaki menyusuri jalan setapak di utara bukit (samping Jalan Claket). Waktu tempuh ke puncak hanya <strong>15 hingga 30 menit</strong>. Jalurnya cukup ramah, namun saat mendekati puncak, trek didominasi bebatuan yang cukup menanjak tapi solid (tidak mudah longsor).</p>
+            <div class="card">
+                <img src="bardi-farm.png" alt="Bardi Farm">
+                <div class="card-content">
+                    <h3>Bimardi Farm</h3>
+                    <p>Nikmati suasana desa yang berbeda, dengan keindahan taman bunga dan arsitektur unik.</p>
+                </div>
             </div>
-
-            <button class="accordion">Aturan & Tips Berkunjung</button>
-            <div class="panel">
-                <p><strong>Dilarang Kemping:</strong> Area puncak memanjang dan terdiri dari bebatuan sempit, sehingga sangat tidak direkomendasikan untuk mendirikan tenda.<br>
-                <strong>Bawa Senter:</strong> Jika lu turun setelah *sunset*, pastikan bawa senter karena kondisi akan sangat gelap dengan cepat.<br>
-                <strong>Bawa Turun Sampah:</strong> Jaga keasrian alam dengan tidak meninggalkan sampah sekecil apa pun di puncak.</p>
-            </div>
-            <div style="text-align: center;">
-                <a href="https://www.google.com/maps/search/?api=1&query=-7.759274,110.9059491" target="_blank" class="btn-maps" rel="noopener noreferrer">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                    </svg>
-                    Buka Titik Lokasi di Google Maps
-                </a>
+            <div class="card">
+                <img src="telaga-clekat.png" alt="Telaga Claket">
+                <div class="card-content">
+                    <h3>Telaga Claket</h3>
+                    <p>Suasana tenang dengan pemandangan yang memukau mata, rasakan momen kebahagian bersama keluarga.</p>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div id="Galeri" class="tab-content">
-            <h2>Cuplikan Suasana</h2>
-            <p>Klik gambar untuk melihat lebih jelas.</p>
-            <div class="gallery-grid">
-                <img class="gallery-item" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" alt="Pemandangan Bukit" onclick="openModal(this.src)">
-                <img class="gallery-item" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80" alt="Suasana Telaga" onclick="openModal(this.src)">
-                <img class="gallery-item" src="https://images.unsplash.com/photo-1495344517868-8ebaf0a2044e?auto=format&fit=crop&w=600&q=80" alt="Momen Sunset" onclick="openModal(this.src)">
-            </div>
-        </div>
-    </div>
-
-    <div id="imageModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="img01">
-    </div>
+    <footer id="kontak">
+        <h3>Kunjungi Kami</h3>
+        <p>Jl. Pariwisata No. 1, Desa Asri, Kabupaten Damai.</p>
+        <p>Email: info@desaku.com | WA: +62 812 3456 7890</p>
+        <br>
+        <p>&copy; 2026 Desa Wisata. Dibuat untuk tujuan promosi.</p>
+    </footer>
 
     <script>
-        // Logika Interaktif Tabs
-        function openTab(evt, tabName) {
-            let i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-                tabcontent[i].classList.remove("active");
+        const navbar = document.getElementById('navbar');
+        window.onscroll = () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
             }
-            tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            // Timeout kecil untuk trigger animasi CSS
-            setTimeout(() => {
-                document.getElementById(tabName).classList.add("active");
-            }, 10);
-            evt.currentTarget.className += " active";
-        }
-
-        // Logika Interaktif Accordion
-        let acc = document.getElementsByClassName("accordion");
-        for (let i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function() {
-                this.classList.toggle("active-acc");
-                let panel = this.nextElementSibling;
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                } 
-            });
-        }
-
-        // Logika Interaktif Modal Lightbox
-        let modal = document.getElementById("imageModal");
-        let modalImg = document.getElementById("img01");
-
-        function openModal(src) {
-            modal.style.display = "block";
-            modalImg.src = src;
-        }
-
-        function closeModal() {
-            modal.style.display = "none";
-        }
-
-        // Tutup modal kalau user klik di luar gambar
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
+        };
     </script>
 </body>
+
 </html>
