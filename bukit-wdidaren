@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesona Wisata Nusantara</title>
+    <style>
+        /* CSS Reset & Variabel */
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --text-light: #f5f6fa;
+            --text-dark: #2f3640;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f1f2f6;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar dengan efek transisi saat di-scroll */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 15px 50px;
+        }
+
+        nav.scrolled .logo, nav.scrolled a {
+            color: var(--primary-color);
+        }
+
+        .logo {
+            color: var(--text-light);
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            /* Ganti URL gambar di bawah ini dengan gambar tempat wisata yang sebenarnya */
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1555899434-94d1368aa7af?auto=format&fit=crop&w=1920&q=80') center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-light);
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background: var(--accent-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+        }
+
+        /* Section Informasi Wisata */
+        .info-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+        }
+
+        /* Glassmorphism Cards */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        /* Responsif untuk HP */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-content p { font-size: 1.1rem; }
+            nav { padding: 20px; }
+            nav.scrolled { padding: 15px 20px; }
+            .nav-links { display: none; /* Disembunyikan untuk simplifikasi di mobile, idealnya pakai hamburger menu */ }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <a href="#" class="logo">WisataKita.</a>
+        <div class="nav-links">
+            <a href="#beranda">Beranda</a>
+            <a href="#informasi">Informasi</a>
+            <a href="#lokasi">Lokasi</a>
+        </div>
+    </nav>
+
+    <header class="hero" id="beranda">
+        <div class="hero-content">
+            <h1>[Nama Tempat Wisata]</h1>
+            <p>Temukan keindahan alam dan pengalaman tak terlupakan di destinasi terbaik kami.</p>
+            <a href="#informasi" class="btn">Jelajahi Sekarang</a>
+        </div>
+    </header>
+
+    <section class="info-section" id="informasi">
+        <h2 class="section-title">Kenapa Harus ke Sini?</h2>
+        <div class="cards-container">
+            <div class="card">
+                <h3>Keindahan Alam</h3>
+                <p>Penjelasan detail tentang pemandangan atau keunikan alam yang ditawarkan oleh tempat wisata ini. Cocok untuk melepas penat dari hiruk-pikuk kota.</p>
+            </div>
+            <div class="card">
+                <h3>Aktivitas Seru</h3>
+                <p>Informasi mengenai kegiatan apa saja yang bisa dilakukan oleh pengunjung. Mulai dari fotografi, kuliner, hingga aktivitas memacu adrenalin.</p>
+            </div>
+            <div class="card">
+                <h3>Akses & Fasilitas</h3>
+                <p>Detail tentang fasilitas yang tersedia seperti area parkir, tempat makan, toilet, serta akses jalan menuju lokasi wisata.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Informasi Wisata. Dibuat dengan desain modern.</p>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+
+        // Fungsi untuk mengecek posisi scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
